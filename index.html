@@ -5,39 +5,47 @@
 	<head>
 	<body>
 		<div class="outer">
-				<nav>
-					<div class="innav">
-						<a id="hist1">in div1</a>
+				<nav type = "hidden" id="dynamicNav" value=0>
+					<div class="guessed_div">
+						<a id="hist1">DIGIT</a>
 					</div>
-					<div class="innav">
-						<a id="hist2">in div2</a>
+					<div class="cow_div">
+						<a id="hist1">COWS</a>
 					</div>
-					<div class="innav">
-						<a id="hist3">in div3</a>
+					<div class="bull_div">
+						<a id="hist1">BULLS</a>
 					</div>
-					</nav>
+				</nav>
 			<div class="inner">
-				<a>Please input a 4 digit number </a>
+				<header class ="describe">
+					<a>Please input a 4 digit number </a>
+				</header>
 				<form name="f1">
 				<input type="text" name="t1" id="txt1">
 				<input type="text" name="t2" id="txt1">
 				<!--<input type="text" name="t3" id="txt1">-->
-				<input type="button" name="b1" value="check" onclick="init()"> 
-				<input type="button" name="b1" value="generate" onclick="generateRandom()"> 
+				<input type="button" name="b1" value="CHECK" class="button_check" onclick="check()"> 
+				<!--input type="button" name="b1" value="generate" onclick="generateRandom()"--> 
 				</form>
 			</div>
 		</div>
 	</body>
 	
 	<script language="javascript">
-		var val,a,b,c,d,cows=0,bulls=0;
+		
 		//generateRandom();
-		function init()
+		window.onload=function() {
+			var val,a,b,c,d,cows=0,bulls=0;
+			generateRandom()
+		}
+		function check()
 		{
 			cows=0,bulls=0;
 			//generateRandom();
 			checkCowsAndBulls();
 			storeStack();
+			addDivElement();
+			setElementVal();
 		}
 		
 		function generateRandom()
@@ -77,14 +85,41 @@
 			});
 			
 			console.log(" cows : ", cows , "bulls : " , bulls );
-			var elem=document.getElementById("hist2");
-			elem.innerHTML=('hi' + cows + " " + bulls );
+			
+			//var elem=document.getElementById("hist2");
+			//elem.innerHTML=('hi' + cows + " " + bulls );
 		}
 		
 		function storeStack()
 		{
-			
+				//create a history of the guessed words in a list 
 		
 		}
+		
+		function addDivElement()
+		{
+			//create as many divs as many guesses
+			var parent =document.getElementById('dynamicNav');
+			var count =parseInt(parent.getAttribute('value'))+1;
+			parent.setAttribute('value',count);
+			//console.log(count,parent);
+			var new_div= document.createElement('div')
+			var new_div_name = 'inner_'+count+'_div';
+			new_div.setAttribute('id',new_div_name);
+			new_div.setAttribute('class','innav');
+			new_div.innerHTML='<a class="dyn_nav_a" id="inner_'+count+'_a"></a>';
+			parent.appendChild(new_div);
+			
+		}
+		 
+		function setElementVal()
+		{
+			var count_div=parseInt((document.getElementById('dynamicNav')).getAttribute('value'));
+			console.log('inner_'+count_div+'_a');
+			var elem=document.getElementById('inner_'+count_div+'_a');
+			console.log(elem);
+			elem.innerHTML=(a+"   | " + cows + "  |     " + bulls );		
+		}
+		
 	</script>
 </html>
