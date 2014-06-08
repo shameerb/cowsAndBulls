@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<link rel="stylesheet" type="text/css" href="mystyle.css">
+	<head>
+	<body>
+		<div class="outer">
+				<nav>
+					<div class="innav">
+						<a id="hist1">in div1</a>
+					</div>
+					<div class="innav">
+						<a id="hist2">in div2</a>
+					</div>
+					<div class="innav">
+						<a id="hist3">in div3</a>
+					</div>
+					</nav>
+			<div class="inner">
+				<a>Please input a 4 digit number </a>
+				<form name="f1">
+				<input type="text" name="t1" id="txt1">
+				<input type="text" name="t2" id="txt1">
+				<!--<input type="text" name="t3" id="txt1">-->
+				<input type="button" name="b1" value="check" onclick="init()"> 
+				<input type="button" name="b1" value="generate" onclick="generateRandom()"> 
+				</form>
+			</div>
+		</div>
+	</body>
+	
+	<script language="javascript">
+		var val,a,b,c,d,cows=0,bulls=0;
+		//generateRandom();
+		function init()
+		{
+			cows=0,bulls=0;
+			//generateRandom();
+			checkCowsAndBulls();
+			storeStack();
+		}
+		
+		function generateRandom()
+		{
+			a=f1.t1.value;
+			var limit = 10,
+			amount = 4,
+			lower_bound = 0,
+			upper_bound = 9,X
+			unique_random_numbers = [];
+
+			if (amount > limit) limit = amount; //Infinite loop if you want more unique
+												//Natural numbers than existemt in a
+												// given range
+			while (unique_random_numbers.length < amount) {
+				var random_number = Math.round(Math.random()*(upper_bound - lower_bound) + lower_bound);
+				if (unique_random_numbers.indexOf(random_number) == -1) { 
+					unique_random_numbers.push( random_number );
+				}
+			}
+				c=unique_random_numbers;
+				document.f1.t2.value=c;
+		}
+		
+		
+		function checkCowsAndBulls()
+		{
+			a=f1.t1.value;
+			b=a.split("");
+			d=b.map(function(i){return parseInt(i)});
+			console.log(b,c,d);
+			d.forEach(function(guess){
+				if( c.indexOf(guess) == d.indexOf(guess) )
+					cows+=1;
+				else if( c.indexOf(guess)!= -1 )
+					bulls+=1;
+			});
+			
+			console.log(" cows : ", cows , "bulls : " , bulls );
+			var elem=document.getElementById("hist2");
+			elem.innerHTML=('hi' + cows + " " + bulls );
+		}
+		
+	</script>
+</html>
