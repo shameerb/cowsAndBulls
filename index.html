@@ -21,11 +21,11 @@
 					<a>Please input a 4 digit number </a>
 				</header>
 				<form name="f1">
-				<input type="text" name="t1" id="txt1">
-				<input type="text" name="t2" id="txt1">
-				<!--<input type="text" name="t3" id="txt1">-->
-				<input type="button" name="b1" value="CHECK" class="button_check" onclick="check()"> 
-				<!--input type="button" name="b1" value="generate" onclick="generateRandom()"--> 
+					<input type="text" class="text_box_form" name="t1" id="txt1">
+					<!--input type="text" name="t2" id="txt1"-->
+					<!--<input type="text" name="t3" id="txt1">-->
+					<input type="button" name="b1" value="CHECK" class="button_check" onclick="check()"> 
+					<!--input type="button" name="b1" value="generate" onclick="generateRandom()"--> 
 				</form>
 			</div>
 		</div>
@@ -46,6 +46,7 @@
 			storeStack();
 			addDivElement();
 			setElementVal();
+			clearElement();
 		}
 		
 		function generateRandom()
@@ -67,7 +68,7 @@
 				}
 			}
 				c=unique_random_numbers;
-				document.f1.t2.value=c;
+				//document.f1.t2.value=c;
 		}
 		
 		
@@ -109,7 +110,23 @@
 			new_div.setAttribute('class','innav');
 			new_div.innerHTML='<a class="dyn_nav_a" id="inner_'+count+'_a"></a>';
 			parent.appendChild(new_div);
-			
+			/*var ni = document.getElementById('dynamicNav');
+
+			  
+
+			  var num = (document.getElementById('dynamicNav').value -1)+ 2;
+			  console.log(ni,num);
+			  ni.value = num;
+
+			  var newdiv = document.createElement('div');
+
+			  var divIdName = 'my'+num+'Div';
+
+			  newdiv.setAttribute('id',divIdName);
+
+			  newdiv.innerHTML = 'Element Number '+num+' has been added! <a href=\'#\' onclick=\'removeElement('+divIdName+')\'>Remove the div "'+divIdName+'"</a>';
+
+			  ni.appendChild(newdiv);*/
 		}
 		 
 		function setElementVal()
@@ -118,7 +135,13 @@
 			console.log('inner_'+count_div+'_a');
 			var elem=document.getElementById('inner_'+count_div+'_a');
 			console.log(elem);
-			elem.innerHTML=(a+"   | " + cows + "  |     " + bulls );		
+			elem.innerHTML=(a+"   | " + cows + "  |     " + bulls );
+			
+		}
+		
+		function clearElement()
+		{
+			document.f1.t1.value="";
 		}
 		
 	</script>
